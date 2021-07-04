@@ -9,9 +9,10 @@
 import React from 'react';
 import {Provider} from 'react-redux';
 import store from './store';
-import {Router, Scene, Stack} from 'react-native-router-flux';
+import {Actions, Router, Scene, Stack} from 'react-native-router-flux';
 import PostList from './screens/PostList';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import PostForm from './screens/PostForm';
 
 export default function App() {
   return (
@@ -23,7 +24,21 @@ export default function App() {
             initial
             component={PostList}
             title="Posts"
-            renderRightButton={<Icon name="add" size={30} />}
+            renderRightButton={
+              <Icon name="add" size={30} onPress={() => Actions.addPost()} />
+            }
+          />
+          <Scene
+            key="addPost"
+            component={PostForm}
+            title="Add post"
+            renderLeftButton={
+              <Icon
+                name="chevron-left"
+                size={30}
+                onPress={() => Actions.posts()}
+              />
+            }
           />
         </Stack>
       </Router>

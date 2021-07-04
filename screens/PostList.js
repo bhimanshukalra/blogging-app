@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, StyleSheet} from 'react-native';
 import {View, FlatList, Text} from 'react-native';
-import {Card} from 'react-native-elements/dist/card/Card';
 import Snackbar from 'react-native-snackbar';
 import {connect} from 'react-redux';
 

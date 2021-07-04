@@ -11,6 +11,6 @@ react-native-vector-icons
 Todo:
 
 - [x] Project setup + add required libraries
-- [ ] Post List Screen
+- [x] Post List Screen
 - [ ] Search Post Functionality
-- [ ] Add Post Screen
+- [x] Add Post Screen

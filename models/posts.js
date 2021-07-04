@@ -7,11 +7,10 @@ const posts = {
       console.log('state');
     },
     setPosts(state, payload) {
-      // I could't find a way to get  a non 200 response code. So, sending a common error msg.
       if (payload === null) {
         return state;
       }
-      return [...state, ...payload];
+      return [...payload, ...state];
     },
   },
   effects: dispatch => ({
@@ -27,6 +26,23 @@ const posts = {
           })
           .catch(error => {
             dispatch.posts.setPosts(null);
+            resolve(null);
+          });
+      });
+    },
+    async addPost(payload, rootState) {
+      return await new Promise((resolve, reject) => {
+        fetch(baseUrl + '/posts', {
+          method: 'POST',
+          // body:payload
+        })
+          .then(res => res.json())
+          .then(json => {
+            dispatch.posts.setPosts(json);
+            resolve({data: json});
+          })
+          .catch(error => {
+            // dispatch.posts.setPosts(null);
             resolve(null);
           });
       });
