@@ -1,9 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, StyleSheet} from 'react-native';
-import {View, Text} from 'react-native';
+import {View, FlatList, Text} from 'react-native';
+import {Card} from 'react-native-elements/dist/card/Card';
 import Snackbar from 'react-native-snackbar';
 import {connect} from 'react-redux';
-import {baseUrl} from '../utils/Constants';
 
 const PostList = ({posts, getPosts}) => {
   const [loading, setLoading] = useState(false);
@@ -25,10 +25,40 @@ const PostList = ({posts, getPosts}) => {
       duration: Snackbar.LENGTH_SHORT,
     });
   };
+  // const getItemView = ({title, body}) => (
+  //   <Card>
+  //     <Card.Title>{title}</Card.Title>
+  //     <Card.Divider />
+  //     <Text>{body}</Text>
+  //   </Card>
+  // );
+
+  const getItemView = ({id, userId, title, body}) => (
+    <View style={styles.item}>
+      <View>
+        <Text>{`${id}.  `}</Text>
+      </View>
+      <View>
+        <Text style={styles.itemTitle}>{`${title}\n`}</Text>
+        <Text>{body}</Text>
+      </View>
+    </View>
+  );
+
+  const getSeperatorView = () => <View style={styles.itemSeperator} />;
 
   return (
     <View style={styles.parentView}>
-      {loading ? <ActivityIndicator /> : <Text>{JSON.stringify(posts)}</Text>}
+      {loading ? (
+        <ActivityIndicator />
+      ) : (
+        <FlatList
+          keyExtractor={({userId, id}) => `${userId}${id}`}
+          data={posts}
+          renderItem={({item}) => getItemView(item)}
+          ItemSeparatorComponent={getSeperatorView}
+        />
+      )}
     </View>
   );
 };
@@ -39,6 +69,9 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
   },
+  item: {margin: 5, flexDirection: 'row'},
+  itemTitle: {fontWeight: '600'},
+  itemSeperator: {borderWidth: 0.5},
 });
 
 const mapState = state => ({
