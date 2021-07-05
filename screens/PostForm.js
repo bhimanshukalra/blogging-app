@@ -26,10 +26,9 @@ const PostForm = ({addPost}) => {
   return (
     <View style={styles.parentView}>
       <Input
-        inputStyle={styles.input}
         placeholder="Post"
         label="Post"
-        labelStyle={styles.input}
+        labelStyle={styles.inputLabel}
         leftIcon={{
           type: 'materialicons',
           name: 'create',
@@ -38,10 +37,9 @@ const PostForm = ({addPost}) => {
         onChangeText={setTitle}
       />
       <Input
-        inputStyle={styles.input}
         placeholder="Description"
         label="Description"
-        labelStyle={styles.input}
+        labelStyle={styles.inputLabel}
         leftIcon={{
           type: 'materialicons',
           name: 'description',
@@ -56,8 +54,8 @@ const PostForm = ({addPost}) => {
         iconRight
         disabled={loading}
         icon={{
+          type: 'materialicons',
           name: 'chevron-right',
-          size: 15,
           color: 'white',
         }}
       />
@@ -72,7 +70,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center',
   },
-  input: {color: '#999'},
+  inputLabel: {color: '#999'},
 });
 
 const mapDispatch = dispatch => ({

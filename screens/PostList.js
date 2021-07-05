@@ -24,13 +24,6 @@ const PostList = ({posts, getPosts}) => {
       duration: Snackbar.LENGTH_SHORT,
     });
   };
-  // const getItemView = ({title, body}) => (
-  //   <Card>
-  //     <Card.Title>{title}</Card.Title>
-  //     <Card.Divider />
-  //     <Text>{body}</Text>
-  //   </Card>
-  // );
 
   const getItemView = ({id, userId, title, body}) => (
     <View style={styles.item}>
@@ -52,8 +45,9 @@ const PostList = ({posts, getPosts}) => {
         <ActivityIndicator />
       ) : (
         <FlatList
-          keyExtractor={({userId, id}) => `${userId}${id}`}
+          keyExtractor={({id}) => id}
           data={posts}
+          initialNumToRender={15}
           renderItem={({item}) => getItemView(item)}
           ItemSeparatorComponent={getSeperatorView}
         />

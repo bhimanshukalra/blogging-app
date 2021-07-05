@@ -36,7 +36,7 @@ export default function App() {
               <Icon
                 name="chevron-left"
                 size={30}
-                onPress={() => Actions.posts()}
+                onPress={() => Actions.pop()}
               />
             }
           />

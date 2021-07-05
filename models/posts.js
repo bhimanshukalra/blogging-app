@@ -3,9 +3,6 @@ import {baseUrl} from '../utils/Constants';
 const posts = {
   state: [],
   reducers: {
-    search(state, payload) {
-      console.log('state');
-    },
     setPosts(state, payload) {
       if (payload === null) {
         return state;
@@ -16,7 +13,7 @@ const posts = {
   effects: dispatch => ({
     async getPosts(payload, rootState) {
       return await new Promise((resolve, reject) => {
-        fetch(baseUrl + '/posts', {
+        fetch(`${baseUrl}/posts`, {
           method: 'GET',
         })
           .then(res => res.json())
@@ -34,7 +31,7 @@ const posts = {
       return await new Promise((resolve, reject) => {
         fetch(baseUrl + '/posts', {
           method: 'POST',
-          // body:payload
+          body: payload,
         })
           .then(res => res.json())
           .then(json => {
@@ -42,7 +39,7 @@ const posts = {
             resolve({data: json});
           })
           .catch(error => {
-            // dispatch.posts.setPosts(null);
+            dispatch.posts.setPosts(null);
             resolve(null);
           });
       });
